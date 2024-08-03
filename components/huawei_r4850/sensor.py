@@ -29,7 +29,6 @@ CONF_INPUT_TEMP = "input_temp"
 CONF_EFFICIENCY = "efficiency"
 CONF_OUTPUT_VOLTAGE = "output_voltage"
 CONF_OUTPUT_CURRENT = "output_current"
-CONF_MAX_OUTPUT_CURRENT = "max_output_current"
 CONF_OUTPUT_POWER = "output_power"
 CONF_OUTPUT_TEMP = "output_temp"
 
@@ -43,7 +42,6 @@ TYPES = [
     CONF_EFFICIENCY,
     CONF_OUTPUT_VOLTAGE,
     CONF_OUTPUT_CURRENT,
-    CONF_MAX_OUTPUT_CURRENT,
     CONF_OUTPUT_POWER,
     CONF_OUTPUT_TEMP,
 ]
@@ -102,13 +100,6 @@ CONFIG_SCHEMA = cv.All(
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
             cv.Optional(CONF_OUTPUT_CURRENT): sensor.sensor_schema(
-                unit_of_measurement=UNIT_AMPERE,
-                icon=ICON_CURRENT_AC,
-                accuracy_decimals=2,
-                device_class=DEVICE_CLASS_CURRENT,
-                state_class=STATE_CLASS_MEASUREMENT,
-            ),
-            cv.Optional(CONF_MAX_OUTPUT_CURRENT): sensor.sensor_schema(
                 unit_of_measurement=UNIT_AMPERE,
                 icon=ICON_CURRENT_AC,
                 accuracy_decimals=2,
