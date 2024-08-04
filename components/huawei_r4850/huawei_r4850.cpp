@@ -187,7 +187,7 @@ namespace esphome
           break;
 
         default:
-          printf("Unknown parameter 0x%02X, 0x%04X\r\n", frame[1], value);
+          printf("Unknown parameter 0x%02X, 0x%04X\r\n", data[1], value);
           break;
         }
       }
