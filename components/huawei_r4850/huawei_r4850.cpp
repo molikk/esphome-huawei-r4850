@@ -93,8 +93,7 @@ namespace esphome
       if (offline)
         functionCode += 1;
       int32_t raw = 20.0 * value;
-      std::vector<uint8_t> data = {
-          0x1, functionCode, 0x0, 0x0, (uint8_t)(raw >> 24), (uint8_t)(raw >> 16), (uint8_t)(raw >> 8), (uint8_t)raw};
+      std::vector<uint8_t> data = {0x1, functionCode, 0x0, 0x0, (uint8_t)(raw >> 24), (uint8_t)(raw >> 16), (uint8_t)(raw >> 8), (uint8_t)raw};
       this->canbus->send_data(CAN_ID_SET, true, data);
     }
 
@@ -112,6 +111,8 @@ namespace esphome
 
     void HuaweiR4850Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_t> &data)
     {
+      ESP_LOGD(TAG, "On_Frame response: %s with data 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X ", can_id, data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);
+
       if (can_id == CAN_ID_DATA)
       {
         uint32_t value = (data[4] << 24) + (data[5] << 16) + (data[6] << 8) + data[7];
@@ -191,6 +192,9 @@ namespace esphome
           printf("Unknown parameter 0x%02X, 0x%04X\r\n", data[1], value);
           break;
         }
+      }
+      else{
+        ESP_LOGV(TAG, "Unknown response: %s with data 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X ", can_id, data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);
       }
     }
 
