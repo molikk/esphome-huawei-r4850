@@ -27,5 +27,6 @@ CONFIG_SCHEMA = (
 
 async def to_code(config):
     canbus = await cg.get_variable(config[CONF_CANBUS_ID])
-    var = cg.new_Pvariable(config[CONF_ID], canbus)
+    device = await cg.get_variable(config[CONF_DEVICE_ID])
+    var = cg.new_Pvariable(config[CONF_ID], canbus, device)
     await cg.register_component(var, config)
