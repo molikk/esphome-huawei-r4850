@@ -29,9 +29,16 @@ namespace esphome
     static const uint8_t R48xx_DATA_OUTPUT_CURRENT = 0x81;
     static const uint8_t R48xx_DATA_OUTPUT_CURRENT1 = 0x82;
 
-    HuaweiR4850Component::HuaweiR4850Component(canbus::Canbus *canbus, uint32_t device_can_id) { 
-      this->canbus = canbus; 
+    HuaweiR4850Component::HuaweiR4850Component(canbus::Canbus *canbus, uint32_t device_can_id)
+    {
+      this->canbus = canbus;
       this->device_can_id = device_can_id;
+    }
+
+    HuaweiR4850Component::HuaweiR4850Component(canbus::Canbus *canbus)
+    {
+      this->canbus = canbus;
+      this->device_can_id = 0;
     }
 
     void HuaweiR4850Component::setup()

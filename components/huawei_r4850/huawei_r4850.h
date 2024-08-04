@@ -14,6 +14,8 @@ namespace esphome
     {
     public:
       HuaweiR4850Component(canbus::Canbus *, uint32_t device_can_id);
+      HuaweiR4850Component(canbus::Canbus *);
+      
       void setup() override;
       void update() override;
 
