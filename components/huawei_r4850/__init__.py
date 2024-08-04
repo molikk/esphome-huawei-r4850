@@ -17,7 +17,7 @@ CONFIG_SCHEMA = (
         {
             cv.GenerateID(): cv.declare_id(HuaweiR4850Component),
             cv.Required(CONF_CANBUS_ID): cv.use_id(CanbusComponent),
-            cv.Required(CONF_DEVICE_ID): cv.uint32_t,
+            #cv.Required(CONF_DEVICE_ID): cv.uint32_t,
         }
     )
     .extend(cv.COMPONENT_SCHEMA)
@@ -27,5 +27,6 @@ CONFIG_SCHEMA = (
 
 async def to_code(config):
     canbus = await cg.get_variable(config[CONF_CANBUS_ID])
+    #device = await cg.get_variable(config[CONF_DEVICE_ID])
     var = cg.new_Pvariable(config[CONF_ID], canbus, 0)
     await cg.register_component(var, config)
