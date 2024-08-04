@@ -35,12 +35,6 @@ namespace esphome
       this->device_can_id = device_can_id;
     }
 
-    HuaweiR4850Component::HuaweiR4850Component(canbus::Canbus *canbus)
-    {
-      this->canbus = canbus;
-      this->device_can_id = 0;
-    }
-
     void HuaweiR4850Component::setup()
     {
       Automation<std::vector<uint8_t>, uint32_t, bool> *automation;
