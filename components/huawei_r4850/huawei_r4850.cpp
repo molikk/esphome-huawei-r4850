@@ -29,7 +29,10 @@ namespace esphome
     static const uint8_t R48xx_DATA_OUTPUT_CURRENT = 0x81;
     static const uint8_t R48xx_DATA_OUTPUT_CURRENT1 = 0x82;
 
-    HuaweiR4850Component::HuaweiR4850Component(canbus::Canbus *canbus) { this->canbus = canbus; }
+    HuaweiR4850Component::HuaweiR4850Component(canbus::Canbus *canbus, uint32_t device_can_id) { 
+      this->canbus = canbus; 
+      this->device_can_id = device_can_id;
+    }
 
     void HuaweiR4850Component::setup()
     {
@@ -37,7 +40,7 @@ namespace esphome
       LambdaAction<std::vector<uint8_t>, uint32_t, bool> *lambdaaction;
       canbus::CanbusTrigger *canbus_canbustrigger;
 
-      canbus_canbustrigger = new canbus::CanbusTrigger(this->canbus, 0, 0, true);
+      canbus_canbustrigger = new canbus::CanbusTrigger(this->canbus, device_can_id, 0, true);
       canbus_canbustrigger->set_component_source("canbus");
       App.register_component(canbus_canbustrigger);
       automation = new Automation<std::vector<uint8_t>, uint32_t, bool>(canbus_canbustrigger);

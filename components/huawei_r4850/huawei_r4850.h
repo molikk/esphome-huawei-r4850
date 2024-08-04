@@ -10,10 +10,10 @@ namespace esphome
   namespace huawei_r4850
   {
 
-    class HuaweiR4850Component : public PollingComponent
+    class HuaweiR4850Component : public device_can_id, public PollingComponent
     {
     public:
-      HuaweiR4850Component(canbus::Canbus *canbus);
+      HuaweiR4850Component(canbus::Canbus *, uint32_t device_can_id);
       void setup() override;
       void update() override;
 
@@ -37,6 +37,7 @@ namespace esphome
 
     protected:
       canbus::Canbus *canbus;
+      uint32_t device_can_id;
       uint32_t lastUpdate_;
 
       sensor::Sensor *input_voltage_sensor_{nullptr};
