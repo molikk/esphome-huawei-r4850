@@ -111,7 +111,7 @@ namespace esphome
 
     void HuaweiR4850Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_t> &data)
     {
-      ESP_LOGD(TAG, "On_Frame response: %s with data 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X ", can_id, data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);
+      ESP_LOGV(TAG, "On_Frame response: %s with data 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X ", can_id, data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);
 
       if (can_id == CAN_ID_DATA)
       {
