@@ -10,7 +10,7 @@ namespace esphome
   namespace huawei_r4850
   {
 
-    class HuaweiR4850Component : public uint32_t::device_can_id, public PollingComponent
+    class HuaweiR4850Component : public PollingComponent
     {
     public:
       HuaweiR4850Component(canbus::Canbus *, uint32_t device_can_id);
