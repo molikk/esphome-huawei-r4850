@@ -43,7 +43,6 @@ namespace esphome
       automation = new Automation<std::vector<uint8_t>, uint32_t, bool>(canbus_canbustrigger);
       auto cb = [=](std::vector<uint8_t> x, uint32_t can_id, bool remote_transmission_request) -> void
       {
-        ESP_LOGD(TAG, "Lambda response: %s with data 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X ", can_id, x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7]);
         this->on_frame(can_id, remote_transmission_request, x);
       };
       lambdaaction = new LambdaAction<std::vector<uint8_t>, uint32_t, bool>(cb);
@@ -107,8 +106,6 @@ namespace esphome
 
     void HuaweiR4850Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_t> &data)
     {
-      ESP_LOGD(TAG, "On_Frame response: %s with data 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X ", can_id, data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);
-
       if (can_id == CAN_ID_DATA)
       {
         uint32_t value = (data[4] << 24) + (data[5] << 16) + (data[6] << 8) + data[7];
