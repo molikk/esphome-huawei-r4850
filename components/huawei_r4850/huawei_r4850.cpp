@@ -41,7 +41,7 @@ namespace esphome
       LambdaAction<std::vector<uint8_t>, uint32_t, bool> *lambdaaction;
       canbus::CanbusTrigger *canbus_canbustrigger;
 
-      canbus_canbustrigger = new canbus::CanbusTrigger(this->canbus, 1, 0, true);
+      canbus_canbustrigger = new canbus::CanbusTrigger(this->canbus, 0, 0, true);
       canbus_canbustrigger->set_component_source("canbus");
       App.register_component(canbus_canbustrigger);
       automation = new Automation<std::vector<uint8_t>, uint32_t, bool>(canbus_canbustrigger);
