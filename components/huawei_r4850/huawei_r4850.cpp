@@ -108,7 +108,7 @@ namespace esphome
     {
       if (can_id == CAN_ID_DATA)
       {
-        ESP_LOGD(TAG, "on_frame response: 0x%11X with data 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X ", can_id, x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7]);
+        ESP_LOGD(TAG, "on_frame response: 0x%11X with data 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X ", can_id, data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);
         uint32_t value = (data[4] << 24) + (data[5] << 16) + (data[6] << 8) + data[7];
         float conv_value = 0;
         switch (data[1])
