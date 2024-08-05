@@ -29,11 +29,7 @@ namespace esphome
     static const uint8_t R48xx_DATA_OUTPUT_CURRENT = 0x81;
     static const uint8_t R48xx_DATA_OUTPUT_CURRENT1 = 0x82;
 
-    HuaweiR4850Component::HuaweiR4850Component(canbus::Canbus *canbus, uint32_t device_can_id)
-    {
-      this->canbus = canbus;
-      this->device_can_id = device_can_id;
-    }
+    HuaweiR4850Component::HuaweiR4850Component(canbus::Canbus *canbus) { this->canbus = canbus; }
 
     void HuaweiR4850Component::setup()
     {
@@ -83,8 +79,7 @@ namespace esphome
       if (offline)
         functionCode += 1;
       int32_t raw = 1024.0 * value;
-      std::vector<uint8_t> data = {
-          0x1, functionCode, 0x0, 0x0, (uint8_t)(raw >> 24), (uint8_t)(raw >> 16), (uint8_t)(raw >> 8), (uint8_t)raw};
+      std::vector<uint8_t> data = {0x1, functionCode, 0x0, 0x0, (uint8_t)(raw >> 24), (uint8_t)(raw >> 16), (uint8_t)(raw >> 8), (uint8_t)raw};
       this->canbus->send_data(CAN_ID_SET, true, data);
     }
 
@@ -180,6 +175,11 @@ namespace esphome
           ESP_LOGV(TAG, "Input temperature: %f", conv_value);
           break;
 
+        case R48xx_DATA_OUTPUT_CURRENT1:
+          conv_value = value / 20.0;
+          ESP_LOGD(TAG, "R48xx_DATA_OUTPUT_CURRENT1: %f", conv_value);
+          break;
+          
         case R48xx_DATA_OUTPUT_CURRENT:
           conv_value = value / 1024.0;
           this->publish_sensor_state_(this->output_current_sensor_, conv_value);
@@ -190,12 +190,9 @@ namespace esphome
           break;
 
         default:
-          printf("Unknown parameter 0x%02X, 0x%04X\r\n", data[1], value);
+          printf("Unknown parameter 0x%02X, 0x%04X\r\n", frame[1], value);
           break;
         }
-      }
-      else{
-        ESP_LOGV(TAG, "Unknown response: %s with data 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X 0x%02X ", can_id, data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);
       }
     }
 

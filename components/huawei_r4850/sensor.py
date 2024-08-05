@@ -29,6 +29,7 @@ CONF_INPUT_TEMP = "input_temp"
 CONF_EFFICIENCY = "efficiency"
 CONF_OUTPUT_VOLTAGE = "output_voltage"
 CONF_OUTPUT_CURRENT = "output_current"
+CONF_MAX_OUTPUT_CURRENT = "max_output_current"
 CONF_OUTPUT_POWER = "output_power"
 CONF_OUTPUT_TEMP = "output_temp"
 
